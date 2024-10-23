@@ -1,7 +1,7 @@
 const button = document.getElementById("btnCheckout");
 button.addEventListener("click", async () => {
   // console.log("Checkout");
-  const checkoutUrl = "/create-checkout-session"; // User relataive URL instead of localhost so it works in production as well
+  const checkoutUrl = "http://localhost:3000/create-checkout-session"; // Use express URL to simulate a separate server that hosts static and server files
   try {
     // The checkoutUrl on the server will initiate a session with Stripe payment and return the page url, that the client will redirect to
     const response = await fetch(checkoutUrl, {

@@ -1,6 +1,7 @@
 import express from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
@@ -10,9 +11,16 @@ const PORT = process.env.PORT;
 // Initialize stripe with API key
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 
-// Server static files via express
-app.use("/", express.static("./static")); // The catalog or main page can be served from static root
-app.use("/checkout", express.static("./static/checkout")); // The /checkout pages can be served from static/checkout directory
+// Enable Cross-Origin Resource Sharing from the allowed origins
+app.use(
+  cors({
+    origin: ["http://localhost:5500", "http://127.0.0.1:5500"],
+  })
+);
+
+// Server static files via express (No longer needed, because we are moving them to a different server run via Live Server)
+// app.use("/", express.static("./static")); // The catalog or main page can be served from static root
+// app.use("/checkout", express.static("./static/checkout")); // The /checkout pages can be served from static/checkout directory
 
 // Required to read the json content from client. The json content from the request is parsed and added to req.body for you to use
 app.use(express.json());
@@ -57,8 +65,8 @@ app.post("/create-checkout-session", async (req, res) => {
           },
         };
       }),
-      success_url: `${process.env.SERVER_URL}/checkout/success.html`, // The URL that stripe payment session will redirect to after the payment is successful
-      cancel_url: `${process.env.SERVER_URL}/checkout`, //  The URL that stripe payment session will redirect to upon canceling payment
+      success_url: `${process.env.STATIC_SERVER_URL}/express-stripe-checkout/client-in-live-server/checkout/success.html`, // The URL that stripe payment session will redirect to after the payment is successful
+      cancel_url: `${process.env.STATIC_SERVER_URL}/express-stripe-checkout/client-in-live-server/checkout/`, //  The URL that stripe payment session will redirect to upon canceling payment
     });
     // console.log(session);
     // Return the session.url back to client to load and start accepting payment
