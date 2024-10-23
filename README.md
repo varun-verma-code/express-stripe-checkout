@@ -6,12 +6,13 @@ Stripe checkout demo using express and node.js
 
 - express
 - dotenv
+- cors
 - stripe
 
 ## .env properties
 
 PORT=3000  
-SERVER_URL=http://localhost:3000  
+STATIC_SERVER_URL=http://localhost:5500  
 STRIPE_PRIVATE_KEY=YOUR_PRIVATE_KEY
 
 ## References
