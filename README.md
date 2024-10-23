@@ -17,7 +17,7 @@ STRIPE_PRIVATE_KEY=YOUR_PRIVATE_KEY
 
 ## References
 
-- [Stripe Checkout Sessions API Guide](<[https://](https://docs.stripe.com/api/checkout/sessions/create)>)
+- [Stripe Checkout Sessions API Guide](https://docs.stripe.com/api/checkout/sessions/create)
 - [Stripe Account Dashboard](https://dashboard.stripe.com/login)
 
 ## Test Credit Card
